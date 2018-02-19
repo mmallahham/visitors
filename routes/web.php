@@ -22,3 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/welcome',function(){
     return view( 'welcome');
 })->name('welcome');
+
+Route::get('/visitors',function(){
+    return view( 'visitors.main');
+})->name('visitors.main');
+
