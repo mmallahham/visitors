@@ -10,14 +10,13 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-2 ">
-     
+    <div class="col-md-3 ">
     </div>
-    <div class="col-md-8 text-justify">
+    <div class="col-md-6 text-justify">
         <br>
         <p>A cloud-based visitor management and registration solution that serves small and medium businesses 
             across various industries. It is compatible with all browsers. Core features include visitor registration, 
-            a real-time view of visitors present in a building, view analytics, and some reports.</p>
+            a real-time view of visitors present in a building, view analytics, and some reports.</p><hr>
     </div>
 </div>
 <div class="row">

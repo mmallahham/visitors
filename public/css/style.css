@@ -2,30 +2,6 @@
     margin: 60px auto 60px auto;
 }
 
-.filler{
-    width: 100%;
-    margin: 10px;
-    border: 1px solid lightgray;
-    border-radius: 8px;
-     
-}
-.form-padding{
-    padding-top: 70px;
-    padding-bottom: 50px;
-}
-
-.error-padding{
-    padding-top: 70px;
-    padding-left: 2%;    
-    padding-right: 2%;
-    padding-bottom: 0px;
-}
-.form-header{
-    border-radius: 8px 8px 0 0;
-    padding: 10px;
-    font-size: 20px;
-}
-
 .footer{
     padding:0;
     margin: 0;
@@ -39,8 +15,8 @@
 .pageImg{
     width: auto;
     margin: auto;
-    margin-top: 70px;
-    padding-bottom: 30px;
+    margin-top: 10px;
+    padding-bottom: 20px;
 }
 
 .main-page-btn{

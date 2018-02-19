@@ -8,8 +8,8 @@
                 <div class="card-header card-primary text-center">Visitors Activities</div>
                 <img src="{{ asset('images/visitors-image.jpg') }}" class="card-img-top">
                 <div class="card-body">
-                <h5 class="text-center">Welcome to Lexicon Institue please make sure to press the "check in" and "check out" every visite <br>
-                    press "Register"  if it your first visite<br><br><hr></h5>
+                <h5 class="text-center">Welcome to Lexicon Institue please make sure to press the <strong class="text-primary">check in</strong> and <strong class="text-danger">check out</strong> every visite <br>
+                    please <strong class="text-success">Register</strong> if it's your first visite<br><br><hr></h5>
                 <div class="row">
                     
                     <div class="col-md-1 ">
