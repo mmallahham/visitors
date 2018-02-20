@@ -15,6 +15,13 @@ class CreateStuffTable extends Migration
     {
         Schema::create('stuff', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('email');
+            $table->string('idNumber');
+            $table->string('mobile');  
+            $table->string('jobTitle');  
+            $table->string('Dept');  
+            $table->boolean('active')->default(true);        
             $table->timestamps();
         });
     }

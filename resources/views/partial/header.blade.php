@@ -28,14 +28,14 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a class="nav-link text-white" href="{{ route('welcome') }}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                        <li><a class="nav-link text-white" href="{{ route('welcome') }}">Home</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li><a class="nav-link text-white" href="{{ route('login') }}"><span class="glyphicon glyphicon-log-in"></span>Admin</a></li>
+                            <li><a class="nav-link text-white" href="{{ route('login') }}">Admin</a></li>
                              <!-- <li><a class="nav-link" href="{{ route('register') }}">Register</a></li> -->
                         @else
                             <li class="nav-item dropdown">

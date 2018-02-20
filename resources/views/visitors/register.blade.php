@@ -3,12 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card card-default">
-                <div class="card-header">Admin registeration</div>
+                <div class="card-header">Visitor Registeration</div>
+                <img src="{{ asset('images/visitors-image.jpg') }}" class="card-img-top">
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="">
                         @csrf
 
                         <div class="form-group row">
@@ -40,24 +41,40 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">ID</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                <input id="idNumber" type="tesxt" class="form-control{{ $errors->has('idNumber') ? ' is-invalid' : '' }}" name="idNumber" required>
 
-                                @if ($errors->has('password'))
+                                @if ($errors->has('idNumber'))
                                     <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('idNumber') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                            <label for="mobile" class="col-md-4 col-form-label text-md-right">Mobile</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="mobile" type="text" class="form-control" name="mobile" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="Visitees" class="col-md-4 col-form-label text-md-right">Visitees</label>
+
+                            <div class="col-md-6">
+                                <input id="Visitees" type="text" class="form-control" name="Visitees" required>
+                            </div>
+                        </div>                        
+                        
+                        <div class="form-group row">
+                            <label for="purpose" class="col-md-4 col-form-label text-md-right">Purpose</label>
+
+                            <div class="col-md-6">
+                                <input id="purpose" type="text" class="form-control" name="purpose" required>
                             </div>
                         </div>
 

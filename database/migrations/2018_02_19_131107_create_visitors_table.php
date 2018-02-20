@@ -15,6 +15,13 @@ class CreateVisitorsTable extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('email');
+            $table->string('idNumber');
+            $table->string('mobile');
+            $table->string('visitees');
+            $table->string('purpose');
+            $table->binary('vimage')->nullable();
             $table->timestamps();
         });
     }

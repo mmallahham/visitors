@@ -3,12 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-11">
+        <div class="col-md-9">
             <div class="card card-default">
-                <div class="card-header card-primary text-center">Visitors Activities</div>
-                <img src="{{ asset('images/visitors-image.jpg') }}" class="card-img-top">
+                <div class="card-header card-primary text-center">Student Activities</div>
+                <img src="{{ asset('images/student.jpg') }}" class="card-img-top">
                 <div class="card-body">
-                <h5 class="text-center">Welcome to Lexicon Institue please make sure to press the <strong class="text-primary">check in</strong> and <strong class="text-danger">check out</strong> every visite <br>
+                <h5 class="text-center">Welcome to Lexicon Institue, make sure to press the <strong class="text-primary">check in</strong> and <strong class="text-danger">check out</strong> every visite <br>
                     please <strong class="text-success">Register</strong> if it''s your first visite<br><br><hr></h5>
                 <div class="row">
                     
@@ -20,7 +20,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">Visitor ID or E-Mail</label>
+                            <label for="email" class="col-sm-4 col-form-label text-md-right">Student ID or E-Mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
@@ -33,12 +33,10 @@
                             </div>
                         </div><br>
 
-                            <a class="btn btn-primary text-white main-page-btn btn-lg col-md-3" href="#">
+                            <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4" href="#">
                                 <span class="glyphicon glyphicon-log-in"></span>check in</a>
-                            <a class="btn btn-danger text-white main-page-btn btn-lg col-md-3" href="#">
+                            <a class="btn btn-danger text-white main-page-btn btn-lg col-md-4" href="#">
                                 <span class="glyphicon glyphicon-log-out"></span>check out</a>
-                            <a class="btn btn-success text-white main-page-btn btn-lg col-md-3" href="{{ route('visitors.register') }}">
-                                <span class="glyphicon glyphicon-log-out"></span>Register</a>
                         </form>        
                         </div>
                     </div>                
