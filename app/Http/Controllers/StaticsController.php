@@ -25,6 +25,6 @@ class StaticsController extends Controller
                 "vimage" => null
             ],
         ];
-        return view('statics.indoor',["visitors"=> $visitors]);
+        return view('statics.indoor',["visitors"=> $visitors,"title"=>""]);
     }
 }

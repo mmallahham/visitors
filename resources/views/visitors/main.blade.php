@@ -8,6 +8,12 @@
                 <div class="card-header card-primary text-center">Visitors Activities</div>
                 <img src="{{ asset('images/visitors-image.jpg') }}" class="card-img-top">
                 <div class="card-body">
+                    @if ($success)
+                        <h3 class="alert alert-success text-center py-2 my-3">
+                            <strong>{{ $success }}</strong>
+                        </h3>
+                    @endif
+
                 <h5 class="text-center">Welcome to Lexicon Institue please make sure to press the <strong class="text-primary">check in</strong> and <strong class="text-danger">check out</strong> every visite <br>
                     please <strong class="text-success">Register</strong> if it''s your first visite<br><br><hr></h5>
                 <div class="row">
@@ -37,7 +43,7 @@
                                 <span class="glyphicon glyphicon-log-in"></span>check in</a>
                             <a class="btn btn-danger text-white main-page-btn btn-lg col-md-3" href="#">
                                 <span class="glyphicon glyphicon-log-out"></span>check out</a>
-                            <a class="btn btn-success text-white main-page-btn btn-lg col-md-3" href="{{ route('visitors.register') }}">
+                            <a class="btn btn-success text-white main-page-btn btn-lg col-md-3" href="{{ route('visitor.register') }}">
                                 <span class="glyphicon glyphicon-log-out"></span>Register</a>
                         </form>        
                         </div>

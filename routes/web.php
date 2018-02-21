@@ -29,13 +29,37 @@ Route::post('/welcome',function(){
 
 Route::get('/indoor','StaticsController@indoor')->name('indoor');
 
-Route::get('/visitors',function(){
-    return view( 'visitors.main');
-})->name('visitors.main');
+Route::group(['prefix'=>'/visitors'],function(){
 
-Route::get('/visitors/register',function(){
-    return view( 'visitors.register');
-})->name('visitors.register');
+    Route::get('',function(){
+        // [
+        // 'uses' => 'VisitorController@listAllVisitors',
+        // 'as' => 'visitor' ]
+        return view( 'visitors.main',['success'=>'']);
+    })->name('visitors.main');
+
+    Route::post('', [
+        'uses' => 'VisitorController@createVisitor',
+        'as' => 'visitor.create'
+    ]);
+
+    Route::get('/register',function(){
+        return view( 'visitors.register',['isNew' => true]);
+    })->name('visitor.register');
+
+    Route::post('/update/{id}', [
+        'uses' => 'VisitorController@postUpdateVisitor',
+        'as' => 'visitor.update'
+    ]);
+
+    Route::get('/{id}',[
+        'uses' => 'VisitorController@updateVisitor',
+        'as' => 'visitors.update'
+    ]);
+
+
+});
+
 
 Route::get('/students',function(){
     return view( 'students.main');
