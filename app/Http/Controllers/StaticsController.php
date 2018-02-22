@@ -1,30 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Visitor;
 use Illuminate\Http\Request;
 
 class StaticsController extends Controller
 {
     public function indoor(){
-        $visitors = [
-            [
-                "name" => "sfdf",
-                "idNumber" => "dfgdfg",
-                "type" => 0,
-                "email" => "dfg",
-                "mobile" => "dfgf",
-                "vimage" => null
-            ],
-            [
-                "name" => "sfdf",
-                "idNumber" => "dfgdfg",
-                "type" => 1,
-                "email" => "dfg",
-                "mobile" => "dfgf",
-                "vimage" => null
-            ],
-        ];
+        $visitors = Visitor::all();
+        
         return view('statics.indoor',["visitors"=> $visitors,"title"=>""]);
     }
 }

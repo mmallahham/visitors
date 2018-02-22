@@ -10,5 +10,4 @@ class Visitor extends Model
         'name','email','idNumber','mobile','visitees','purpose','vimage','status','lastcheckin'
     ];
 
-
 }
