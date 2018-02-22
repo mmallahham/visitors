@@ -27,7 +27,8 @@
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4"
             href="{{ route('visitor.welcome') }}">Visitor</a>
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Student</a>
-        <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Staff</a>
+        <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4"
+            href="{{ route('employee.welcome') }}">Employee</a>
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Admin</a>
     </div>
 </div>

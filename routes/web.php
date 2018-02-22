@@ -90,7 +90,7 @@ Route::group(['prefix'=>'/employee'],function(){
 
     Route::get('',function(){
         return view( 'employee.main',['title' => '']);
-    })->name('employee.main');
+    })->name('employee.welcome');
     
     Route::get('/register',function(){
         return view( 'employee.register',['isNew'=>true]);
