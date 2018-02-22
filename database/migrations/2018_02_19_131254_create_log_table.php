@@ -17,7 +17,7 @@ class CreateLogTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('relatedId');
             $table->Integer('relatedType');            
-            $table->datetime('actionTime');
+            $table->datetime('actionTime')->default(now());
             $table->integer('actionType');                         
             $table->timestamps();
         });
