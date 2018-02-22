@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Visitor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VisitorController extends Controller
 {
@@ -52,8 +53,13 @@ class VisitorController extends Controller
 
     public function deleteVisitor($id){
         $visitor = Visitor::find($id);
-        // 1 - delete all related in log
-        // 2 - delete the log // check if laravel do that for you
+
+        DB::table('logs')->where([
+                ['relatedID', '=', $id],
+                ['relatedType', '=', 1]
+            ])->delete();
+        $visitor->delete();    
+        return redirect()->back();
     }
 
     public function checkin($id){

@@ -57,7 +57,10 @@ Route::group(['prefix'=>'/visitors'],function(){
         'as' => 'visitors.update'
     ]);
 
-
+    Route::get('delete/{id}',[
+        'uses' => 'VisitorController@deleteVisitor',
+        'as' => 'visitor.delete'
+    ]);
 });
 
 

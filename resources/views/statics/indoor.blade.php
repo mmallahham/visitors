@@ -17,15 +17,15 @@
             <table class="table table-striped table-hover">
                 <thead class="bg-primary">
                     <tr>
-                        <th width="27%"><a class="text-white" href="#">Name</a></th>
-                        <th width="16%">Id</th>
-                        <th width="25%">Email</th>
+                        <th width="23%"><a class="text-white" href="#">Name</a></th>
+                        <th width="11%">Id</th>
+                        <th width="22%">Email</th>
                         <th width="10%">Mobile</th>
                         <th width="7%">Image</th>
-                        <th width="6%">Type</th>
+                        <th width="8%">Type</th>
                         <th width="5%"></th>
-                        <th width="5%"></th>
-                        <th width="5%"></th>
+                        <th width="7%"></th>
+                        <th width="7%"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,13 +37,15 @@
                         <td>{{ $visitor['mobile'] }}</td>
                         <td><img src="{{ $visitor['vimage'] }}" style="height:50px;padding:0;margin:0"></td>
                         @if ($visitor['type'] == 0)
-                            <td><div class="btn btn-info" onclick="">check out</div></td>            
+                            <td><a class="btn btn-info" href="">check out</a></td>            
+                        @elseif ($visitor['type'] == 1)
+                            <td><a class="btn btn-success" href="">check out</a></td>            
                         @else
-                            <td ><div class="btn btn-success">check out</td>            
+                            <td ><a class="btn btn-danger" href="">check out</a></td>            
                         @endif
-                        <td><div class="btn btn-primary">log</div></td>            
-                        <td><div class="btn btn-primary">delete</div></td>            
-                        <td><div class="btn btn-primary">padge</div></td>            
+                        <td><a class="btn btn-primary" href="">log</a></td>            
+                        <td><a class="btn btn-primary" href="{{ route('visitor.delete',['id' => $visitor->id]) }}">delete</a></td>            
+                        <td><a class="btn btn-primary" href="">padge</a></td>            
                     </tr>
                 @endforeach    
                 </tbody>
