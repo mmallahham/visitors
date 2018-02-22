@@ -25,7 +25,7 @@
     </div>
     <div class="col-md-8 text-center">
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4"
-            href="{{ route('visitors.main') }}">Visitor</a>
+            href="{{ route('visitor.welcome') }}">Visitor</a>
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Student</a>
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Staff</a>
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Admin</a>

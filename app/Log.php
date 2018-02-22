@@ -10,7 +10,7 @@ class Log extends Model
         'relatedId',        // Id from visitor, employee or student
         'relatedType',      // 0 = visitor, 1 = employ22, 2 = student  
         'actionTime',
-        'actionType'        // 0 = check in, 1 = check out
+        'actionType'        // 0 = checked in, 1 = checked out
     ];
 
 }

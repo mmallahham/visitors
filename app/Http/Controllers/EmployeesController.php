@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Visitor;
 use App\Log;
-
-
+use App\Visitor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class VisitorController extends Controller
+class EmployeesController extends Controller
 {
-    public function createVisitor(Request $request){
-        
+    public function createEmployee(Request $request){
+            
         $request->validate([
             'name' => 'bail|required|max:255|min:5',
             'email' => 'required|email',
@@ -25,20 +22,20 @@ class VisitorController extends Controller
         $visitor->vimage    = $request->input('vimage');
         $visitor->idNumber  = $request->input('idNumber');
         $visitor->mobile    = $request->input('mobile');
-        $visitor->Visitees  = $request->input('visitees');
-        $visitor->purpose   = $request->input('purpose');
-        $visitor->type      = 0;
+        $visitor->Visitees  = $request->input('job-title');
+        $visitor->purpose   = $request->input('dept');
+        $visitor->type      = 1;
         $visitor->save();
 
-        return view('visitors.main',["title" => "Visitor was created successfuly"]);
+        return view('employee.main',["title" => "Employee was created successfuly"]);
     }
 
-    public function updateVisitor($id){
+    public function updateEmployee($id){
         $visitor = Visitor::find($id);
-        return view('visitors.register', ['isNew' => false,'visitor' => $visitor,'id' => $visitor->id]);
+        return view('employee.register', ['isNew' => false,'visitor' => $visitor,'id' => $visitor->id]);
     }
 
-    public function postUpdateVisitor(Request $request,$id){
+    public function postUpdateEmployee(Request $request,$id){
         $visitor = Visitor::find($id);
 
         $visitor->name      = $request->input('name');    
@@ -46,8 +43,8 @@ class VisitorController extends Controller
         $visitor->vimage    = $request->input('vimage');
         $visitor->idNumber  = $request->input('idNumber');
         $visitor->mobile    = $request->input('mobile');
-        $visitor->Visitees  = $request->input('visitees');
-        $visitor->purpose   = $request->input('purpose');
+        $visitor->Visitees  = $request->input('job-title');
+        $visitor->purpose   = $request->input('dept');
         $visitor->save();
 
         return redirect('indoor');
@@ -55,62 +52,66 @@ class VisitorController extends Controller
 
     public function deleteVisitor($id){
         $visitor = Visitor::find($id);
-        DB::table('logs')->where([
-                ['relatedID', '=', $id],
-                ['relatedType', '=', 0]
-            ])->delete();
+        Log::where(['relatedID', '=', $id])->delete();
         $visitor->delete(); 
         
-
         return redirect()->back();
     }
 
-    public function checkin($id){
-
-        // 1 - check if status id checked in
+    public function employeeCheckin($id){
 
         $visitor = Visitor::find($id);
 
         $log = new Log();
         $log->relatedId = $id;  
-        $log->relatedType = 0;
+        $log->relatedType = 1;
         $log->actionTime = now();
         $log->actionType = 0;
         $log->save();
 
         $visitor->status = 1;
         $visitor->save();
-        return redirect()->back();
     }
 
-    public function checkout($id){
+    public function checkin($id){
+        $this->employeeCheckin($id);
+        return view('employee.main',["title" => 'status updated successfuly']);
+    }
+
+    public function employeeCheckout($id){
         // 1 - check if status id checked in
 
         $visitor = Visitor::find($id);
 
         $log = new Log();
         $log->relatedId = $id;  
-        $log->relatedType = 0;
+        $log->relatedType = 1;
         $log->actionTime = now();
         $log->actionType = 1;
         $log->save();
 
         $visitor->status = 0;
         $visitor->save();
-        return redirect()->back();
+    }
+
+    public function checkout($id){
+        $this->employeeCheckout($id);
+        return view('employee.main',["title" => 'status updated successfuly']);
+    }
+
+    public function checkoutIndoor($id){
+        $this->employeeCheckout($id);
+        return redirect('indoor');
     }
 
     public function showLog($id){
         $visitor = Visitor::find($id);
-        $logs = DB::table('logs')->where([
-            ['relatedID', '=', $id],
-            ['relatedType', '=', 0]
-        ])->get();
+        $logs = Log::where('relatedID', '=', $id)->get();
 
         return view('statics.log',['logs'=>$logs,'title'=>'Visitor']);
     }
 
-    public function mainVisitors(Request $request){
+    public function mainEmployees(Request $request){
         $id = $request->input('id');
         $submit = $request->input('submit');
 
@@ -120,7 +121,6 @@ class VisitorController extends Controller
                         ->orWhere('idNumber',$id)
                         ->orWhere('email',$id)
                         ->first();
-
         if($visitor){
             if(strtoupper( $visitor->id) == $id || $visitor->email == $id){
                 if($submit == 'check in' && $visitor->status == 1){
@@ -151,13 +151,13 @@ class VisitorController extends Controller
             }
         }
       
-        return view('visitors.main',["title" => $title]);
+        return view('employee.main',["title" => $title]);
 
     }
 
 
-    public function ListAllVisitors(){
-        return view('welcome');
-    }
+
+
+
+    
 }
-

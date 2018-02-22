@@ -21,8 +21,9 @@ class CreateVisitorsTable extends Migration
             $table->string('mobile');
             $table->string('visitees');
             $table->string('purpose');
+            $table->integer('type')->default(0);;            
             $table->binary('vimage')->nullable();
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(1);
             $table->dateTime('lastcheckin')->nullable();
             $table->timestamps();
         });
