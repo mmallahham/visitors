@@ -50,14 +50,6 @@ class EmployeesController extends Controller
         return redirect('indoor');
     }
 
-    public function deleteVisitor($id){
-        $visitor = Visitor::find($id);
-        Log::where(['relatedID', '=', $id])->delete();
-        $visitor->delete(); 
-        
-        return redirect()->back();
-    }
-
     public function employeeCheckin($id){
 
         $visitor = Visitor::find($id);
