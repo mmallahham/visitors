@@ -19,22 +19,19 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/indoor','StaticsController@indoor')->name('indoor');
+
+Route::get('/dash','StaticsController@dashboard')->name('dash');
+
+Route::get('/dash1','StaticsController@dashboard1')->name('dash1');
+
 Route::get('/welcome',function(){
     return view( 'welcome');
 })->name('welcome');
 
-Route::post('/welcome',function(){
-    return view( 'welcome');
-})->name('welcome');
-
-Route::get('/indoor','StaticsController@indoor')->name('indoor');
-
 Route::group(['prefix'=>'/visitors'],function(){
 
     Route::get('',function(){
-        // [
-        // 'uses' => 'VisitorController@listAllVisitors',
-        // 'as' => 'visitor' ]
         return view( 'visitors.main',['title'=>'']);
     })->name('visitor.welcome');
 
@@ -82,6 +79,10 @@ Route::group(['prefix'=>'/visitors'],function(){
         'as' => 'visitor.checkout'
     ]);
 
+    Route::get('vindoor',[
+        'uses' => 'StaticsController@visitorsIndoor',
+        'as' => 'visitors.indoor'
+    ]);
 });
 
 
@@ -135,7 +136,13 @@ Route::group(['prefix'=>'/employee'],function(){
         'uses' => 'EmployeesController@checkout',
         'as' => 'employee.checkout'
     ]);
+    
+    Route::get('indoorcheckout/{id}',[
+        'uses' => 'EmployeesController@checkoutIndoor',
+        'as' => 'employee.checkoutIndoor'
+    ]);
 
+    
 });
 
 

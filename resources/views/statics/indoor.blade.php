@@ -3,7 +3,7 @@
 @extends('layouts.app')
 @section('content')  
 
-<h2 class="text-center">Indoor Report</h2>
+<h2 class="text-center">Indoor {{ $title }} Report</h2>
 <div class="row py-3 m-5">
     <div class="col-md-9">   
         <input type="search" class="form-control " name="search" placeholder="Search">
