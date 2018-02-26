@@ -26,10 +26,18 @@
     <div class="col-md-8 text-center">
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4"
             href="{{ route('visitor.welcome') }}">Visitor</a>
-        <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Student</a>
+        <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4"
+            href="{{ route('visitor.welcome') }}">Student</a>
         <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4"
             href="{{ route('employee.welcome') }}">Employee</a>
-        <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4">Admin</a>
+        
+        <a class="btn btn-primary text-white main-page-btn btn-lg col-md-4"
+            @guest
+                href="{{ route('login') }}"
+            @else   
+                href="{{ route('dash') }}"
+            @endguest
+        >Admin</a> 
     </div>
 </div>
 @include('partial.footer')

@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Visitor;
 use App\Log;
-
-
+use App\Visitor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class VisitorController extends Controller
+class StudentsController extends Controller
 {
-    public function createVisitor(Request $request){
-        
+    public function createStudent(Request $request){
+            
         $request->validate([
             'name' => 'bail|required|max:255|min:5',
             'email' => 'required|email',
@@ -25,20 +22,20 @@ class VisitorController extends Controller
         $visitor->vimage    = $request->input('vimage');
         $visitor->idNumber  = $request->input('idNumber');
         $visitor->mobile    = $request->input('mobile');
-        $visitor->Visitees  = $request->input('visitees');
-        $visitor->purpose   = $request->input('purpose');
-        $visitor->type      = 0;
+        $visitor->Visitees  = $request->input('course');
+        $visitor->purpose   = $request->input('manager');
+        $visitor->type      = 2;
         $visitor->save();
 
-        return view('visitors.main',["title" => "Visitor was created successfuly"]);
+        return view('students.main',["title" => "Student was created successfuly"]);
     }
 
-    public function updateVisitor($id){
+    public function updateStudent($id){
         $visitor = Visitor::find($id);
-        return view('visitors.register', ['isNew' => false,'visitor' => $visitor,'id' => $visitor->id]);
+        return view('students.register', ['isNew' => false,'visitor' => $visitor,'id' => $visitor->id]);
     }
 
-    public function postUpdateVisitor(Request $request,$id){
+    public function postUpdateStudent(Request $request,$id){
         $visitor = Visitor::find($id);
 
         $visitor->name      = $request->input('name');    
@@ -46,71 +43,67 @@ class VisitorController extends Controller
         $visitor->vimage    = $request->input('vimage');
         $visitor->idNumber  = $request->input('idNumber');
         $visitor->mobile    = $request->input('mobile');
-        $visitor->Visitees  = $request->input('visitees');
-        $visitor->purpose   = $request->input('purpose');
+        $visitor->Visitees  = $request->input('course');
+        $visitor->purpose   = $request->input('manager');
         $visitor->save();
 
         return redirect('indoor');
     }
 
-    public function deleteVisitor($id){
-        $visitor = Visitor::find($id);
-        DB::table('logs')->where([
-                ['relatedID', '=', $id],
-                ['relatedType', '=', 0]
-            ])->delete();
-        $visitor->delete(); 
-        
-
-        return redirect()->back();
-    }
-
-    public function checkin($id){
-
-        // 1 - check if status id checked in
+    public function studentCheckin($id){
 
         $visitor = Visitor::find($id);
 
         $log = new Log();
         $log->relatedId = $id;  
-        $log->relatedType = 0;
+        $log->relatedType = 1;
         $log->actionTime = now();
         $log->actionType = 0;
         $log->save();
 
         $visitor->status = 1;
         $visitor->save();
-        return redirect()->back();
     }
 
-    public function checkout($id){
+    public function checkin($id){
+        $this->studentCheckin($id);
+        return view('students.main',["title" => 'status updated successfuly']);
+    }
+
+    public function studentCheckout($id){
         // 1 - check if status id checked in
 
         $visitor = Visitor::find($id);
 
         $log = new Log();
         $log->relatedId = $id;  
-        $log->relatedType = 0;
+        $log->relatedType = 1;
         $log->actionTime = now();
         $log->actionType = 1;
         $log->save();
 
         $visitor->status = 0;
         $visitor->save();
-        return redirect()->back();
+    }
+
+    public function checkout($id){
+        $this->studentCheckout($id);
+        return view('students.main',["title" => 'status updated successfuly']);
+    }
+
+    public function checkoutIndoor($id){
+        $this->studentCheckout($id);
+        return redirect('indoor');
     }
 
     public function showLog($id){
         $visitor = Visitor::find($id);
-        $logs = DB::table('logs')->where([
-            ['relatedID', '=', $id],
-            ['relatedType', '=', 0]
-        ])->get();
+        $logs = Log::where('relatedID', '=', $id)->get();
 
-        return view('statics.log',['logs'=>$logs,'title'=>'Visitor']);
+        return view('statics.log',['logs'=>$logs,'title'=>'Students']);
     }
 
-    public function mainVisitors(Request $request){
+    public function mainStudents(Request $request){
         $id = $request->input('id');
         $submit = $request->input('submit');
 
@@ -120,8 +113,7 @@ class VisitorController extends Controller
                         ->orWhere('idNumber',$id)
                         ->orWhere('email',$id)
                         ->first();
-
-        if($visitor && $visitor->type == 0){
+        if($visitor && $visitor->type == 2){
             if(strtoupper( $visitor->id) == $id || $visitor->email == $id){
                 if($submit == 'check in' && $visitor->status == 1){
                     $title = "already checked in";
@@ -151,26 +143,13 @@ class VisitorController extends Controller
             }
         }
       
-        return view('visitors.main',["title" => $title]);
+        return view('students.main',["title" => $title]);
 
     }
 
-    public function printVisitor($id = 1){
-        $visitor = Visitor::find($id);
 
-        $type = "Visitor";
-        if($visitor->type == 1){
-            $type = "Employee";
-        }
-        else{
-            $type = "Student";
-        }
-        return view('visitors.badge',[
-            'name' => $visitor->name,
-            'type' => $type,
-            'vImage' => $visitor->vimage
-            ]);
-    }
 
+
+
+    
 }
-

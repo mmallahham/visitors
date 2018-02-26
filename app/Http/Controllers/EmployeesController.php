@@ -100,7 +100,7 @@ class EmployeesController extends Controller
         $visitor = Visitor::find($id);
         $logs = Log::where('relatedID', '=', $id)->get();
 
-        return view('statics.log',['logs'=>$logs,'title'=>'Visitor']);
+        return view('statics.log',['logs'=>$logs,'title'=>'Employee']);
     }
 
     public function mainEmployees(Request $request){
@@ -113,7 +113,7 @@ class EmployeesController extends Controller
                         ->orWhere('idNumber',$id)
                         ->orWhere('email',$id)
                         ->first();
-        if($visitor){
+        if($visitor && $visitor->type == 1){
             if(strtoupper( $visitor->id) == $id || $visitor->email == $id){
                 if($submit == 'check in' && $visitor->status == 1){
                     $title = "already checked in";

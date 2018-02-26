@@ -37,17 +37,27 @@
                         <td>{{ $visitor['email'] }}</td>
                         <td>{{ $visitor['mobile'] }}</td>
                         <td><img src="{{ $visitor['vimage'] }}" style="height:50px;padding:0;margin:0"></td>
-                        @if ($visitor['type'] == 0)
-                            <td><a class="btn btn-info" href="{{ route('visitor.checkout',['id' => $visitor->id]) }}">check out</a></td>            
-                        @elseif ($visitor['type'] == 1)
-                            <td><a class="btn btn-success" href="{{ route('employee.checkoutIndoor',['id' => $visitor->id]) }}">check out</a></td>            
+                        @if ($visitor->status == 1)
+                            @if ($visitor['type'] == 0)
+                                <td><a class="btn btn-info" href="{{ route('visitor.checkout',['id' => $visitor->id]) }}">check out</a></td>            
+                            @elseif ($visitor['type'] == 1)
+                                <td><a class="btn btn-success" href="{{ route('employee.checkoutIndoor',['id' => $visitor->id]) }}">check out</a></td>            
+                            @else
+                                <td ><a class="btn btn-danger" href="{{ route('student.checkoutIndoor',['id' => $visitor->id]) }}">check out</a></td>            
+                            @endif
                         @else
-                            <td ><a class="btn btn-danger" href="{{ route('employee.checkout',['id' => $visitor->id]) }}">check out</a></td>            
+                            @if ($visitor['type'] == 0)
+                                <td><a class="btn btn-info" href="">visitor</a></td>            
+                            @elseif ($visitor['type'] == 1)
+                                <td><a class="btn btn-success " href="">employee</a></td>            
+                            @else
+                                <td ><a class="btn btn-danger" href="">student</a></td>            
+                            @endif
                         @endif
                         <td><a class="btn btn-primary" href="{{ route('employee.update',['id' => $visitor->id]) }}">Edit</a></td> 
                         <td><a class="btn btn-primary" href="{{ route('employee.log',['id' => $visitor->id]) }}">log</a></td>            
                         <td><a class="btn btn-primary" href="{{ route('employee.delete',['id' => $visitor->id]) }}">delete</a></td>            
-                        <td><a class="btn btn-primary" href="">padge</a></td>            
+                        <td><a class="btn btn-primary" href="{{ route('dash1',['id' => $visitor->id]) }}">padge</a></td>            
                     </tr>
                 @endforeach    
                 </tbody>

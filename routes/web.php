@@ -23,7 +23,7 @@ Route::get('/indoor','StaticsController@indoor')->name('indoor');
 
 Route::get('/dash','StaticsController@dashboard')->name('dash');
 
-Route::get('/dash1','StaticsController@dashboard1')->name('dash1');
+Route::get('/dash1','VisitorController@printVisitor')->name('dash1');
 
 Route::get('/welcome',function(){
     return view( 'welcome');
@@ -79,13 +79,11 @@ Route::group(['prefix'=>'/visitors'],function(){
         'as' => 'visitor.checkout'
     ]);
 
-    Route::get('vindoor',[
+    Route::get('vindoor/{type}',[
         'uses' => 'StaticsController@visitorsIndoor',
         'as' => 'visitors.indoor'
     ]);
 });
-
-
 
 Route::group(['prefix'=>'/employee'],function(){
 
@@ -142,18 +140,75 @@ Route::group(['prefix'=>'/employee'],function(){
         'as' => 'employee.checkoutIndoor'
     ]);
 
-    
+    Route::get('eindoor/{type}',[
+        'uses' => 'StaticsController@employeesIndoor',
+        'as' => 'employees.indoor'
+    ]);   
 });
 
 
+Route::group(['prefix'=>'/students'],function(){
 
-Route::get('/students',function(){
-    return view( 'students.main');
-})->name('students.main');
+    Route::get('',function(){
+        return view( 'students.main',['title' => '']);
+    })->name('student.welcome');
+    
+    Route::get('/register',function(){
+        return view( 'students.register',['isNew'=>true]);
+    })->name('students.register');
 
-Route::get('/students/register',function(){
-    return view( 'students.register');
-})->name('students.register');
+    Route::post('main',[
+        'uses' => 'StudentsController@mainStudents',
+        'as' => 'student.main' 
+    ]);
+
+    Route::post('', [
+        'uses' => 'StudentsController@createStudent',
+        'as' => 'student.create'
+    ]);
+
+    Route::post('/update/{id}', [
+        'uses' => 'StudentsController@postUpdateStudent',
+        'as' => 'student.Update'
+    ]);
+
+    Route::get('/update/{id}',[
+        'uses' => 'StudentsController@updateStudent',
+        'as' => 'student.update'
+    ]);
+
+    Route::get('delete/{id}',[
+        'uses' => 'StudentsController@deleteStudent',
+        'as' => 'student.delete'
+    ]);
+    
+    Route::get('log/{id}',[
+        'uses' => 'StudentsController@showLog',
+        'as' => 'student.log'
+    ]);
+
+    Route::get('checkin/{id}',[
+        'uses' => 'StudentsController@checkin',
+        'as' => 'student.checkin'
+    ]);
+
+    Route::get('checkout/{id}',[
+        'uses' => 'StudentsController@checkout',
+        'as' => 'student.checkout'
+    ]);
+    
+    Route::get('indoorcheckout/{id}',[
+        'uses' => 'StudentsController@checkoutIndoor',
+        'as' => 'student.checkoutIndoor'
+    ]);
+
+    Route::get('eindoor/{type}',[
+        'uses' => 'StaticsController@studentsIndoor',
+        'as' => 'students.indoor'
+    ]);   
+});
+
+
 
 
 

@@ -16,21 +16,34 @@ class StaticsController extends Controller
         return view('statics.indoor',["visitors"=> $visitors,"title"=>""]);
     }
 
-    public function visitorsIndoor(){
-        $visitors = Visitor::where([['status','1'],['type','0']] )->get();
-        
+    public function visitorsIndoor($type){
+        if($type == 0)//all visitors
+            $visitors = Visitor::where([['type','0']] )->get();
+        else if($type == 1) //indoor
+            $visitors = Visitor::where([['status','1'],['type','0']])->get();
+        else if($type == 3) //all indoor
+            $visitors = Visitor::where([['status','1']])->get();
+        else //all registered
+            $visitors = Visitor::all();
+
         return view('statics.indoor',["visitors"=> $visitors,"title"=>"Visitors"]);
     }
 
-    public function EmployeesIndoor(){
-        $visitors = Visitor::where([['status','1'],['type','1']] )->get();
+    public function EmployeesIndoor($type){
+        if($type == 0)//all Employee
+            $visitors = Visitor::where([['type','1']] )->get();
+        else //indoor
+            $visitors = Visitor::where([['status','1'],['type','1']])->get();
         
         return view('statics.indoor',["visitors"=> $visitors,"title"=>"Employees"]);
     }  
 
-    public function StudentsIndoor(){
-        $visitors = Visitor::where([['status','1'],['type','2']]  )->get();
-        
+    public function StudentsIndoor($type){
+    if($type == 0)//all Students
+        $visitors = Visitor::where([['type','2']] )->get();
+    else //indoor
+        $visitors = Visitor::where([['status','1'],['type','2']])->get();
+    
         return view('statics.indoor',["visitors"=> $visitors,"title"=>"Students"]);
     }
 
@@ -96,19 +109,8 @@ class StaticsController extends Controller
 
 
     public function dashboard1(){
-        
+ 
 
-
-        
-            //   $lava->ColumnChart('Finances', $finances, [
-            //     'title' => 'Company Performance',
-            //     'titleTextStyle' => [
-            //         'color'    => '#eb6b2c',
-            //         'fontSize' => 14
-            //     ]
-            // ]);
-
-            //   return view('statics.chart',['lava'=>$lava]);
     }
 
 
